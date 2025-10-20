@@ -28,14 +28,13 @@ const sidebarLinks: NavbarMenuItemsProps[] = [
 
 export default function __Sidebar__() {
   return (
-    <Float placement="middle-start" left={50} top="50vh">
+    <Float placement="middle-start" left={50} top="50vh" zIndex={999}>
       <Box
         boxShadow="rgba(50, 50, 93, 0.4) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 10px 18px 20px -18px"
         backgroundColor="#fff"
         px={1}
         py={3}
         rounded="full"
-        zIndex={999}
       >
         <ButtonGroup size="sm" variant="outline" flexDirection="column">
           <For each={sidebarLinks}>

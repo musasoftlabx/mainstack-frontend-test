@@ -1,0 +1,76 @@
+// * NPM
+import {
+  Avatar,
+  For,
+  HStack,
+  IconButton,
+  Menu,
+  Portal,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+
+// * Icons
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { IoSettingsOutline, IoNewspaperOutline } from "react-icons/io5";
+import { LiaToolboxSolid } from "react-icons/lia";
+import { MdMenu, MdOutlineSwitchAccount } from "react-icons/md";
+import { RiBug2Line } from "react-icons/ri";
+import { PiSignOut } from "react-icons/pi";
+
+// * Types
+import { NavbarMenuItemsProps, ProfileProps } from "@/types";
+
+// * Constants
+const navbarMenuItems: NavbarMenuItemsProps[] = [
+  { icon: <IoSettingsOutline size={20} />, item: "Settings" },
+  { icon: <IoNewspaperOutline size={20} />, item: "Purchase History" },
+  { icon: <LiaToolboxSolid size={20} />, item: "Refer and Earn" },
+  { icon: <AiOutlineAppstoreAdd size={20} />, item: "Integrations" },
+  { icon: <RiBug2Line size={20} />, item: "Report Bug" },
+  { icon: <MdOutlineSwitchAccount size={20} />, item: "Switch Account" },
+  { icon: <PiSignOut size={20} />, item: "Sign Out" },
+];
+
+export default function NavbarMenu({ profile }: { profile: ProfileProps }) {
+  return (
+    <Menu.Root positioning={{ placement: "top-start" }}>
+      <Menu.Trigger asChild>
+        <IconButton variant="plain" rounded="full" size="lg">
+          <MdMenu />
+        </IconButton>
+      </Menu.Trigger>
+      <Portal>
+        <Menu.Positioner width={350}>
+          <Menu.Content rounded="xl">
+            <Menu.Item value="" my={4}>
+              <HStack gap={5}>
+                <Avatar.Root colorPalette="black" size="xl" variant="solid">
+                  <Avatar.Fallback name={profile.name} />
+                </Avatar.Root>
+
+                <Stack>
+                  <Text fontWeight="bold" fontSize={18}>
+                    {profile.name}
+                  </Text>
+                  <Text mt={-1}>{profile.emailAddress}</Text>
+                </Stack>
+              </HStack>
+            </Menu.Item>
+
+            <For each={navbarMenuItems}>
+              {({ icon, item }: NavbarMenuItemsProps, key: number) => (
+                <Menu.Item value={item} key={key} my={2} rounded="full">
+                  <HStack gap={5} p={3}>
+                    {icon}
+                    <Text fontWeight="semibold">{item}</Text>
+                  </HStack>
+                </Menu.Item>
+              )}
+            </For>
+          </Menu.Content>
+        </Menu.Positioner>
+      </Portal>
+    </Menu.Root>
+  );
+}

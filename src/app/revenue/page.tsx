@@ -38,7 +38,7 @@ import TransactionsTable from "@/components/pages/revenue/TransactionsTable";
 // * Types
 import { WalletProps } from "@/types";
 
-export default function Home() {
+export default function Revenue() {
   // ? Store States
   const activeFilters = useFilterStore((state) => state.activeFilters);
 

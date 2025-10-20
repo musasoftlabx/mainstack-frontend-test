@@ -25,29 +25,15 @@ import { HiArrowDownLeft, HiArrowUpRight } from "react-icons/hi2";
 import { LuDownload } from "react-icons/lu";
 import { RxCaretDown, RxCaretUp } from "react-icons/rx";
 
+// * Shared Components
+import __TableSkeleton__ from "@/components/shared/skeletons/__TableSkeleton__";
+
 // * Page Components
 import EmptyFilters from "./EmptyFilters";
 import RevenueDrawer from "./RevenueDrawer";
 
-// * Stores
-import { useFilterStore } from "@/store/useFilterStore";
-
 // * Types
-export type TransactionsProps = {
-  amount: number;
-  metadata: {
-    name: string;
-    type: string;
-    email: string;
-    quantity: number;
-    country: string;
-    product_name: string;
-  };
-  payment_reference: string;
-  status: string;
-  type: "deposit" | "withdrawal";
-  date: string;
-};
+import { TransactionsProps } from "@/types";
 
 export default function TransactionsTable({
   activeFiltersCount,
@@ -58,10 +44,6 @@ export default function TransactionsTable({
   isRevenueDrawerOpen: boolean;
   setIsRevenueDrawerOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  // ? Store States
-  const activeFilters = useFilterStore((state) => state.activeFilters);
-  const filter = useFilterStore((state) => state.filter);
-
   // ? States
   const [transactions, setTransactions] = useState<TransactionsProps[]>([]);
   const [filtered, setFiltered] = useState<TransactionsProps[]>([]);
@@ -121,69 +103,80 @@ export default function TransactionsTable({
           </HStack>
         </Stack>
 
-        {filtered.length === 0 ? (
-          <EmptyFilters />
+        {isFetching ? (
+          <__TableSkeleton__ />
         ) : (
-          <Table.Root size="lg">
-            <Table.Body>
-              {isSuccess &&
-                filtered.map((item: TransactionsProps, key: number) => (
-                  <Table.Row key={key}>
-                    <Table.Cell>
-                      <HStack gap={5}>
-                        <Avatar.Root
-                          size="xl"
-                          variant="subtle"
-                          colorPalette={
-                            item.type === "deposit" ? "green" : "red"
-                          }
-                        >
-                          {item.type === "deposit" ? (
-                            <HiArrowDownLeft />
-                          ) : (
-                            <HiArrowUpRight />
-                          )}
-                        </Avatar.Root>
-
-                        {item.type === "deposit" ? (
-                          <Stack>
-                            <Text>{item.metadata?.product_name}</Text>
-                            <Text>{item.metadata?.name}</Text>
-                          </Stack>
-                        ) : (
-                          <Stack>
-                            <Text>Cash {item.type}</Text>
-                            <Text
-                              css={{
-                                color:
-                                  item.status === "successful"
-                                    ? "green"
-                                    : "red",
-                              }}
+          <>
+            {filtered.length === 0 ? (
+              <EmptyFilters />
+            ) : (
+              <Table.Root size="lg">
+                <Table.Body>
+                  {isSuccess &&
+                    filtered.map((item: TransactionsProps, key: number) => (
+                      <Table.Row key={key}>
+                        <Table.Cell css={{ borderBottomWidth: 0 }}>
+                          <HStack gap={5}>
+                            <Avatar.Root
+                              size="xl"
+                              variant="subtle"
+                              colorPalette={
+                                item.type === "deposit" ? "green" : "red"
+                              }
                             >
-                              {capitalize(item.status)}
+                              {item.type === "deposit" ? (
+                                <HiArrowDownLeft />
+                              ) : (
+                                <HiArrowUpRight />
+                              )}
+                            </Avatar.Root>
+
+                            {item.type === "deposit" ? (
+                              <Stack gap={1}>
+                                <Text>{item.metadata?.product_name}</Text>
+                                <Text textStyle="sm">
+                                  {item.metadata?.name}
+                                </Text>
+                              </Stack>
+                            ) : (
+                              <Stack gap={1}>
+                                <Text>Cash {item.type}</Text>
+                                <Text
+                                  textStyle="sm"
+                                  css={{
+                                    color:
+                                      item.status === "successful"
+                                        ? "green"
+                                        : "red",
+                                  }}
+                                >
+                                  {capitalize(item.status)}
+                                </Text>
+                              </Stack>
+                            )}
+                          </HStack>
+                        </Table.Cell>
+
+                        <Table.Cell css={{ borderBottomWidth: 0 }}>
+                          <Stack alignItems="end">
+                            <Text fontWeight="bold">
+                              <FormatNumber
+                                value={item.amount}
+                                style="currency"
+                                currency="USD"
+                              />
+                            </Text>
+                            <Text>
+                              {dayjs(item.date).format("MMM DD, YYYY")}
                             </Text>
                           </Stack>
-                        )}
-                      </HStack>
-                    </Table.Cell>
-
-                    <Table.Cell>
-                      <Stack alignItems="end">
-                        <Text fontWeight="bold">
-                          <FormatNumber
-                            value={item.amount}
-                            style="currency"
-                            currency="USD"
-                          />
-                        </Text>
-                        <Text>{dayjs(item.date).format("MMM DD, YYYY")}</Text>
-                      </Stack>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table.Root>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+                </Table.Body>
+              </Table.Root>
+            )}
+          </>
         )}
       </Stack>
 

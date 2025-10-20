@@ -85,7 +85,7 @@ export default function __Appbar__() {
               <For each={navbarLinks}>
                 {({ icon, item, path }: NavbarMenuItemsProps, key: number) => {
                   return item === "Apps" ? (
-                    <ButtonGroup size="sm" variant="outline" attached>
+                    <ButtonGroup key={key} size="sm" variant="outline" attached>
                       <Button
                         fontSize={16}
                         size="lg"

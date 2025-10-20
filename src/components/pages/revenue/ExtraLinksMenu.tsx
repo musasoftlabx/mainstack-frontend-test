@@ -2,6 +2,7 @@
 import {
   Avatar,
   Button,
+  Flex,
   For,
   HStack,
   Image,
@@ -90,6 +91,7 @@ export default function ExtraLinksMenu() {
                       <Text>{subtitle}</Text>
                     </Stack>
                   </HStack>
+                  <Flex flex={0.8} />
                 </Menu.Item>
               )}
             </For>

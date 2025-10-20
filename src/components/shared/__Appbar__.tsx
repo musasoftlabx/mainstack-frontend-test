@@ -87,7 +87,7 @@ export default function __Appbar__() {
         >
           <HStack>
             <Link href="https://mainstack.com/" target="_blank">
-              <Image src="images/logo.png" height={8} />
+              <Image src="images/logo.png" height={9} />
             </Link>
 
             <Box flex={1} />
@@ -151,11 +151,11 @@ export default function __Appbar__() {
 
             <ButtonGroup size="sm" variant="outline">
               <IconButton variant="plain" rounded="full" size="lg">
-                <IoMdNotificationsOutline />
+                <Image src={`images/notification.png`} height={10} />
               </IconButton>
 
               <IconButton variant="plain" rounded="full" size="lg">
-                <BiMessageDetail />
+                <Image src={`images/message.png`} height={10} />
               </IconButton>
 
               <Box rounded="full" bgColor="gray/20">

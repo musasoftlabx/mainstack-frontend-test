@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Revenue from "@/app/revenue/page";
 
-// import dependencies
 import React from "react";
 
 // import API mocking utilities from Mock Service Worker

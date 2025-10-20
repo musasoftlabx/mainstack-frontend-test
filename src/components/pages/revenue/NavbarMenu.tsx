@@ -4,6 +4,7 @@ import {
   For,
   HStack,
   IconButton,
+  Image,
   Menu,
   Portal,
   Stack,
@@ -14,7 +15,7 @@ import {
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { IoSettingsOutline, IoNewspaperOutline } from "react-icons/io5";
 import { LiaToolboxSolid } from "react-icons/lia";
-import { MdMenu, MdOutlineSwitchAccount } from "react-icons/md";
+import { MdOutlineSwitchAccount } from "react-icons/md";
 import { RiBug2Line } from "react-icons/ri";
 import { PiSignOut } from "react-icons/pi";
 
@@ -43,7 +44,7 @@ export default function NavbarMenu() {
     <Menu.Root positioning={{ placement: "top-start" }}>
       <Menu.Trigger asChild>
         <IconButton variant="plain" rounded="full" size="lg">
-          <MdMenu />
+          <Image src={`images/menu.png`} height={6} />
         </IconButton>
       </Menu.Trigger>
       <Portal>

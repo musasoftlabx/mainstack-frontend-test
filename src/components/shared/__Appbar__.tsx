@@ -108,7 +108,16 @@ export default function __Appbar__() {
                         variant={isExtraLinksVisible ? "solid" : "ghost"}
                         onClick={() => setIsExtraLinksVisible((prev) => !prev)}
                       >
-                        <Image src={`images/${icon}.png`} height={5} /> {item}
+                        <Image
+                          src={`images/${icon}.png`}
+                          height={5}
+                          css={{
+                            filter: `brightness(${
+                              isExtraLinksVisible ? 0 : 100
+                            }) invert(1)`,
+                          }}
+                        />
+                        {item}
                       </Button>
 
                       {isExtraLinksVisible && <ExtraLinksMenu />}
@@ -121,7 +130,15 @@ export default function __Appbar__() {
                         variant={pathname === path ? "solid" : "ghost"}
                         onClick={() => setIsExtraLinksVisible(false)}
                       >
-                        <Image src={`images/${icon}.png`} height={5} />
+                        <Image
+                          src={`images/${icon}.png`}
+                          height={5}
+                          css={{
+                            filter: `brightness(${
+                              pathname === path ? 0 : 100
+                            }) invert(1)`,
+                          }}
+                        />
                         <Text fontWeight={500}>{item}</Text>
                       </Button>
                     </Link>

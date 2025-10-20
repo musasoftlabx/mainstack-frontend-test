@@ -10,7 +10,7 @@ import localFont from "next/font/local";
 const degularFont = localFont({
   src: [
     {
-      path: "../../public/fonts/degular/Degular-Regular.otf",
+      path: "../../public/fonts/degular/Degular-Medium.otf",
       weight: "400",
       style: "normal",
     },

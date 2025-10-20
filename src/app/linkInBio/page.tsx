@@ -7,7 +7,7 @@ import { Center, Heading } from "@chakra-ui/react";
 import __Appbar__ from "@/components/shared/__Appbar__";
 import __Sidebar__ from "@/components/shared/__Sidebar__";
 
-export default function LinkInBio() {
+export default function MediaKit() {
   return (
     <>
       <__Appbar__ />
@@ -15,7 +15,7 @@ export default function LinkInBio() {
       <__Sidebar__ />
 
       <Center height="80vh">
-        <Heading size="2xl">Link In Bio Page</Heading>
+        <Heading size="2xl">Media Kit Page</Heading>
       </Center>
     </>
   );

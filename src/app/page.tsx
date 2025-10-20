@@ -1,15 +1,7 @@
 "use client";
 
 // * NPM
-import {
-  Center,
-  Heading,
-  HStack,
-  Image,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Center, Heading, HStack, Image, Text, VStack } from "@chakra-ui/react";
 
 // * Components
 import __Appbar__ from "@/components/shared/__Appbar__";

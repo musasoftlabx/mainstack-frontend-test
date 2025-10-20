@@ -75,7 +75,8 @@ export default function __Appbar__() {
         zIndex={999}
       >
         <Container
-          boxShadow="rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.1) 0px 18px 36px -18px"
+          border="2px solid rgba(255, 255, 255, 1)"
+          boxShadow="rgba(45, 59, 67, 0.08) 0px 30px 60px 10px, rgba(45, 59, 67, 0.08) 0px 18px 36px -20px"
           fluid
           rounded="full"
           maxW="8xl"

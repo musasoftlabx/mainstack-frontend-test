@@ -59,10 +59,12 @@ export default function NavbarMenu() {
                 </Avatar.Root>
 
                 <Stack>
-                  <Text fontWeight="bold" fontSize={18}>
+                  <Text fontWeight="bold" textStyle="xl">
                     {`${credentials?.firstName} ${credentials?.lastName}`}
                   </Text>
-                  <Text mt={-1}>{credentials?.emailAddress}</Text>
+                  <Text textStyle="md" mt={-1}>
+                    {credentials?.emailAddress}
+                  </Text>
                 </Stack>
               </HStack>
             </Menu.Item>
@@ -72,7 +74,9 @@ export default function NavbarMenu() {
                 <Menu.Item value={item} key={key} my={2} rounded="full">
                   <HStack gap={5} p={3}>
                     {icon}
-                    <Text fontWeight="semibold">{item}</Text>
+                    <Text textStyle="md" fontWeight={500}>
+                      {item}
+                    </Text>
                   </HStack>
                 </Menu.Item>
               )}

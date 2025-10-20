@@ -16,7 +16,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd /var/www/mainstack
-            git pull
+            git pull --force
             bun i
             bun run build
             bun start:pm2

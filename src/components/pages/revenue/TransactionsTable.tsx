@@ -164,6 +164,7 @@ export default function TransactionsTable({
                                 value={item.amount}
                                 style="currency"
                                 currency="USD"
+                                currencyDisplay="code"
                               />
                             </Text>
                             <Text>

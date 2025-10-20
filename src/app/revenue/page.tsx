@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Container,
+  FormatNumber,
   GridItem,
   HStack,
   SimpleGrid,
@@ -72,7 +73,7 @@ export default function Home() {
                       <Stat.ValueText fontSize={30} fontWeight={900}>
                         <CountUp
                           start={0}
-                          end={wallet?.balance!}
+                          end={wallet?.balance ?? 0}
                           duration={1}
                           decimals={2}
                           decimal="."
@@ -127,16 +128,23 @@ export default function Home() {
                             <InfoTip>{statTitle}</InfoTip>
                           </Stat.Label>
                           <Stat.ValueText fontWeight={800}>
-                            <CountUp
+                            <FormatNumber
+                              value={value}
+                              style="currency"
+                              currency="USD"
+                              currencyDisplay="code"
+                            />
+
+                            {/* <CountUp
                               start={0}
-                              end={value}
+                              end={value ?? 0}
                               duration={1}
                               decimals={2}
                               decimal="."
                               prefix="USD "
                             >
                               {({ countUpRef }) => <span ref={countUpRef} />}
-                            </CountUp>
+                            </CountUp> */}
                           </Stat.ValueText>
                         </Stat.Root>
                       );

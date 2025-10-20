@@ -11,23 +11,21 @@ import { Chart, useChart } from "@chakra-ui/charts";
 import dayjs from "dayjs";
 
 export default function TransactionsChart() {
-  let monthdays: { date: string; orders: number }[] = [];
-  for (let d = 0; d <= 31; d++)
-    monthdays.push({
-      date: dayjs().subtract(d, "day").format("YYYY-MM-DD"),
-      orders: 0,
+  let _transactions: { date: string; amount: number }[] = [];
+
+  for (let d = 1; d <= 30; d++)
+    _transactions.push({
+      date: dayjs(new Date(2022, 3, 30))
+        .subtract(d, "day")
+        .format("MMMM DD, YYYY"),
+      amount: Math.floor(Math.random() * 100),
     });
 
+  const transactions = _transactions.sort((a: any, b: any) => a.date - b.date);
+
   const chart = useChart({
-    data: [
-      { sale: 10, month: "January" },
-      { sale: 95, month: "February" },
-      { sale: 87, month: "March" },
-      { sale: 88, month: "May" },
-      { sale: 65, month: "June" },
-      { sale: 90, month: "August" },
-    ],
-    series: [{ name: "sale", color: "teal.solid" }],
+    data: transactions,
+    series: [{ name: "amount", color: "orange.solid" }],
   });
 
   return (
@@ -36,8 +34,8 @@ export default function TransactionsChart() {
         <CartesianGrid stroke={chart.color("border")} vertical={false} />
         <XAxis
           axisLine={false}
-          dataKey={chart.key("month")}
-          tickFormatter={(value) => value.slice(0, 3)}
+          dataKey={chart.key("date")}
+          //tickFormatter={(value) => value.slice(0, 3)}
           stroke={chart.color("border")}
         />
         <YAxis

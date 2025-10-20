@@ -20,3 +20,4 @@ jobs:
             bun i
             bun run build
             bun start:pm2
+            pm2 save --force

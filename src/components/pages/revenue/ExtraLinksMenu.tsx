@@ -74,7 +74,7 @@ export default function ExtraLinksMenu() {
                     "&:hover": {
                       background: "transparent",
                       border: "1px solid rgba(0,0,0,.1)",
-                      "&:after": { content: " > " },
+                      "&:after": { content: "'>'" },
                     },
                   }}
                 >

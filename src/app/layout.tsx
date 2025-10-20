@@ -5,7 +5,24 @@ import type { Metadata } from "next";
 import Main from "./main";
 
 //* Fonts & Styles
-//import "@fontsource/poppins";
+import localFont from "next/font/local";
+
+const degularFont = localFont({
+  src: [
+    {
+      path: "../../public/fonts/degular/Degular-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/degular/Degular-Bold.otf",
+      weight: "700",
+      style: "bold",
+    },
+  ],
+  variable: "--font-degular",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Mainstack",
@@ -22,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={degularFont.className} suppressHydrationWarning>
       <body>
         <Main>{children}</Main>
       </body>

@@ -19,4 +19,4 @@ jobs:
             git pull
             bun i
             bun run build
-            bun run start
+            bun start:pm2

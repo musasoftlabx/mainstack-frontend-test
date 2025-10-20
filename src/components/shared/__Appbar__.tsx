@@ -26,11 +26,7 @@ import NavbarMenu from "@/components/pages/revenue/NavbarMenu";
 
 // * Icons
 import { BiMessageDetail } from "react-icons/bi";
-import { FaMoneyBills } from "react-icons/fa6";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { GoHome } from "react-icons/go";
-import { MdOutlineAnalytics, MdOutlinePeopleOutline } from "react-icons/md";
-import { RiApps2AiLine } from "react-icons/ri";
 
 // * Styles
 import "react-day-picker/style.css";
@@ -43,11 +39,11 @@ import ExtraLinksMenu from "../pages/revenue/ExtraLinksMenu";
 import { useAccountStore } from "@/store/useAccountStore";
 
 const navbarLinks: NavbarMenuItemsProps[] = [
-  { icon: <GoHome />, item: "Home", path: "/" },
-  { icon: <MdOutlineAnalytics />, item: "Analytics", path: "/analytics" },
-  { icon: <FaMoneyBills />, item: "Revenue", path: "/revenue" },
-  { icon: <MdOutlinePeopleOutline />, item: "CRM", path: "/crm" },
-  { icon: <RiApps2AiLine />, item: "Apps", path: "/apps" },
+  { icon: "home", item: "Home", path: "/" },
+  { icon: "analytics", item: "Analytics", path: "/analytics" },
+  { icon: "revenue", item: "Revenue", path: "/revenue" },
+  { icon: "crm", item: "CRM", path: "/crm" },
+  { icon: "apps", item: "Apps", path: "/apps" },
 ];
 
 export default function __Appbar__() {
@@ -112,7 +108,7 @@ export default function __Appbar__() {
                         variant={isExtraLinksVisible ? "solid" : "ghost"}
                         onClick={() => setIsExtraLinksVisible((prev) => !prev)}
                       >
-                        {icon} {item}
+                        <Image src={`images/${icon}.png`} height={5} /> {item}
                       </Button>
 
                       {isExtraLinksVisible && <ExtraLinksMenu />}
@@ -125,7 +121,7 @@ export default function __Appbar__() {
                         variant={pathname === path ? "solid" : "ghost"}
                         onClick={() => setIsExtraLinksVisible(false)}
                       >
-                        {icon}
+                        <Image src={`images/${icon}.png`} height={5} />
                         <Text fontWeight={500}>{item}</Text>
                       </Button>
                     </Link>

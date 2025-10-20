@@ -71,7 +71,13 @@ export default function Home() {
                     <Stat.Root>
                       <Stat.Label>Available Balance</Stat.Label>
                       <Stat.ValueText fontSize={30} fontWeight={900}>
-                        <CountUp
+                        <FormatNumber
+                          value={wallet?.balance ?? 0}
+                          style="currency"
+                          currency="USD"
+                          currencyDisplay="code"
+                        />
+                        {/* <CountUp
                           start={0}
                           end={wallet?.balance ?? 0}
                           duration={1}
@@ -80,7 +86,7 @@ export default function Home() {
                           prefix="USD "
                         >
                           {({ countUpRef }) => <span ref={countUpRef} />}
-                        </CountUp>
+                        </CountUp> */}
                       </Stat.ValueText>
                     </Stat.Root>
                   </Box>

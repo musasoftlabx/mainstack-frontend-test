@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   typescript: { ignoreBuildErrors: false },
   eslint: { ignoreDuringBuilds: true },
-  output: "export",
   generateBuildId: async () => `${dayjs().format("DDMMYYYY-HH")}`,
 };
 

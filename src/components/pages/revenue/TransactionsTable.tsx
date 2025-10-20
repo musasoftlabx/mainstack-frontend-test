@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+// * React
+import { Dispatch, SetStateAction, useState } from "react";
 
 // * NPM
 import {
   Avatar,
   Badge,
-  Box,
   Button,
   DownloadTrigger,
   FormatNumber,
@@ -21,18 +21,18 @@ import capitalize from "lodash/capitalize";
 import dayjs from "dayjs";
 
 // * Icons
-import {
-  HiArrowDownLeft,
-  HiArrowUpLeft,
-  HiArrowUpRight,
-} from "react-icons/hi2";
-import { RxCaretDown, RxCaretUp } from "react-icons/rx";
+import { HiArrowDownLeft, HiArrowUpRight } from "react-icons/hi2";
 import { LuDownload } from "react-icons/lu";
+import { RxCaretDown, RxCaretUp } from "react-icons/rx";
+
+// * Page Components
+import EmptyFilters from "./EmptyFilters";
+import RevenueDrawer from "./RevenueDrawer";
 
 // * Stores
 import { useFilterStore } from "@/store/useFilterStore";
-import RevenueDrawer from "./RevenueDrawer";
 
+// * Types
 export type TransactionsProps = {
   amount: number;
   metadata: {
@@ -121,62 +121,70 @@ export default function TransactionsTable({
           </HStack>
         </Stack>
 
-        <Table.Root size="lg">
-          <Table.Body>
-            {isSuccess &&
-              filtered.map((item: TransactionsProps, key: number) => (
-                <Table.Row key={key}>
-                  <Table.Cell>
-                    <HStack gap={5}>
-                      <Avatar.Root
-                        size="xl"
-                        variant="subtle"
-                        colorPalette={item.type === "deposit" ? "green" : "red"}
-                      >
+        {filtered.length === 0 ? (
+          <EmptyFilters />
+        ) : (
+          <Table.Root size="lg">
+            <Table.Body>
+              {isSuccess &&
+                filtered.map((item: TransactionsProps, key: number) => (
+                  <Table.Row key={key}>
+                    <Table.Cell>
+                      <HStack gap={5}>
+                        <Avatar.Root
+                          size="xl"
+                          variant="subtle"
+                          colorPalette={
+                            item.type === "deposit" ? "green" : "red"
+                          }
+                        >
+                          {item.type === "deposit" ? (
+                            <HiArrowDownLeft />
+                          ) : (
+                            <HiArrowUpRight />
+                          )}
+                        </Avatar.Root>
+
                         {item.type === "deposit" ? (
-                          <HiArrowDownLeft />
+                          <Stack>
+                            <Text>{item.metadata?.product_name}</Text>
+                            <Text>{item.metadata?.name}</Text>
+                          </Stack>
                         ) : (
-                          <HiArrowUpRight />
+                          <Stack>
+                            <Text>Cash {item.type}</Text>
+                            <Text
+                              css={{
+                                color:
+                                  item.status === "successful"
+                                    ? "green"
+                                    : "red",
+                              }}
+                            >
+                              {capitalize(item.status)}
+                            </Text>
+                          </Stack>
                         )}
-                      </Avatar.Root>
+                      </HStack>
+                    </Table.Cell>
 
-                      {item.type === "deposit" ? (
-                        <Stack>
-                          <Text>{item.metadata?.product_name}</Text>
-                          <Text>{item.metadata?.name}</Text>
-                        </Stack>
-                      ) : (
-                        <Stack>
-                          <Text>Cash {item.type}</Text>
-                          <Text
-                            css={{
-                              color:
-                                item.status === "successful" ? "green" : "red",
-                            }}
-                          >
-                            {capitalize(item.status)}
-                          </Text>
-                        </Stack>
-                      )}
-                    </HStack>
-                  </Table.Cell>
-
-                  <Table.Cell>
-                    <Stack alignItems="end">
-                      <Text fontWeight="bold">
-                        <FormatNumber
-                          value={item.amount}
-                          style="currency"
-                          currency="USD"
-                        />
-                      </Text>
-                      <Text>{dayjs(item.date).format("MMM DD, YYYY")}</Text>
-                    </Stack>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-          </Table.Body>
-        </Table.Root>
+                    <Table.Cell>
+                      <Stack alignItems="end">
+                        <Text fontWeight="bold">
+                          <FormatNumber
+                            value={item.amount}
+                            style="currency"
+                            currency="USD"
+                          />
+                        </Text>
+                        <Text>{dayjs(item.date).format("MMM DD, YYYY")}</Text>
+                      </Stack>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+            </Table.Body>
+          </Table.Root>
+        )}
       </Stack>
 
       <RevenueDrawer

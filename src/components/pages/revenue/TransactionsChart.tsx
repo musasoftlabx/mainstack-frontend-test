@@ -8,8 +8,16 @@ import {
   YAxis,
 } from "recharts";
 import { Chart, useChart } from "@chakra-ui/charts";
+import dayjs from "dayjs";
 
 export default function TransactionsChart() {
+  let monthdays: { date: string; orders: number }[] = [];
+  for (let d = 0; d <= 31; d++)
+    monthdays.push({
+      date: dayjs().subtract(d, "day").format("YYYY-MM-DD"),
+      orders: 0,
+    });
+
   const chart = useChart({
     data: [
       { sale: 10, month: "January" },

@@ -28,9 +28,6 @@
     "recharts": "^3.3.0",
     "zustand": "^5.0.8"
   },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",

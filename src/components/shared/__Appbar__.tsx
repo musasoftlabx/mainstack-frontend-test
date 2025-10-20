@@ -24,10 +24,6 @@ import axios from "axios";
 // * Components
 import NavbarMenu from "@/components/pages/revenue/NavbarMenu";
 
-// * Icons
-import { BiMessageDetail } from "react-icons/bi";
-import { IoMdNotificationsOutline } from "react-icons/io";
-
 // * Styles
 import "react-day-picker/style.css";
 

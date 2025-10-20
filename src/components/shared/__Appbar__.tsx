@@ -36,7 +36,7 @@ import { RiApps2AiLine } from "react-icons/ri";
 import "react-day-picker/style.css";
 
 // * Types
-import { NavbarMenuItemsProps, ProfileProps } from "@/types";
+import { NavbarMenuItemsProps } from "@/types";
 import ExtraLinksMenu from "../pages/revenue/ExtraLinksMenu";
 
 // * Stores

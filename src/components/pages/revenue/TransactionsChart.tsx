@@ -21,7 +21,9 @@ export default function TransactionsChart() {
       amount: Math.floor(Math.random() * 100),
     });
 
-  const transactions = _transactions.sort((a: any, b: any) => a.date - b.date);
+  const transactions = _transactions
+    .sort((a: any, b: any) => a.date - b.date)
+    .reverse();
 
   const chart = useChart({
     data: transactions,

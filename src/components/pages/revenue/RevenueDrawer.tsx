@@ -22,7 +22,7 @@ import { useFilterStore } from "@/store/useFilterStore";
 import { Dispatch, SetStateAction } from "react";
 
 // * Types
-import { TransactionsProps } from "./TransactionsTable";
+import { TransactionsProps } from "@/types";
 
 // * Constants
 const transactionTypes = createListCollection({

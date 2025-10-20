@@ -28,7 +28,13 @@ const sidebarLinks: NavbarMenuItemsProps[] = [
 
 export default function __Sidebar__() {
   return (
-    <Float placement="middle-start" left={50} top="50vh" zIndex={999}>
+    <Float
+      placement="middle-start"
+      left={50}
+      top="50vh"
+      zIndex={99}
+      position="fixed"
+    >
       <Box
         boxShadow="rgba(50, 50, 93, 0.4) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 10px 18px 20px -18px"
         backgroundColor="#fff"

@@ -18,6 +18,8 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 // * Components
 import NavbarMenu from "@/components/pages/revenue/NavbarMenu";
@@ -37,11 +39,8 @@ import "react-day-picker/style.css";
 import { NavbarMenuItemsProps, ProfileProps } from "@/types";
 import ExtraLinksMenu from "../pages/revenue/ExtraLinksMenu";
 
-// * Constants
-const profile: ProfileProps = {
-  name: "Olivier Jones",
-  emailAddress: "olivierjones@gmail.com",
-};
+// * Stores
+import { useAccountStore } from "@/store/useAccountStore";
 
 const navbarLinks: NavbarMenuItemsProps[] = [
   { icon: <GoHome />, item: "Home", path: "/" },
@@ -55,8 +54,24 @@ export default function __Appbar__() {
   // ? Hooks
   const pathname = usePathname();
 
+  // ? Store States
+  const credentials = useAccountStore((state) => state.credentials);
+
+  // ? Store Actions
+  const login = useAccountStore((state) => state.login);
+
   // ? States
   const [isExtraLinksVisible, setIsExtraLinksVisible] = useState(false);
+
+  // ? Queries
+  useQuery({
+    queryKey: ["user"],
+    queryFn: ({ queryKey }) =>
+      axios(queryKey[0]).then(({ data }) => {
+        login(data);
+        return null;
+      }),
+  });
 
   return (
     <>
@@ -133,10 +148,12 @@ export default function __Appbar__() {
               <Box rounded="full" bgColor="gray/20">
                 <HStack px={1}>
                   <Avatar.Root colorPalette="black" variant="solid">
-                    <Avatar.Fallback name={profile.name} />
+                    <Avatar.Fallback
+                      name={`${credentials?.firstName} ${credentials?.lastName}`}
+                    />
                   </Avatar.Root>
 
-                  <NavbarMenu profile={profile} />
+                  <NavbarMenu />
                 </HStack>
               </Box>
             </ButtonGroup>

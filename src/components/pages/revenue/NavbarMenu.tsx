@@ -19,7 +19,10 @@ import { RiBug2Line } from "react-icons/ri";
 import { PiSignOut } from "react-icons/pi";
 
 // * Types
-import { NavbarMenuItemsProps, ProfileProps } from "@/types";
+import { NavbarMenuItemsProps } from "@/types";
+
+// * Stores
+import { useAccountStore } from "@/store/useAccountStore";
 
 // * Constants
 const navbarMenuItems: NavbarMenuItemsProps[] = [
@@ -32,7 +35,10 @@ const navbarMenuItems: NavbarMenuItemsProps[] = [
   { icon: <PiSignOut size={20} />, item: "Sign Out" },
 ];
 
-export default function NavbarMenu({ profile }: { profile: ProfileProps }) {
+export default function NavbarMenu() {
+  // ? Store States
+  const credentials = useAccountStore((state) => state.credentials);
+
   return (
     <Menu.Root positioning={{ placement: "top-start" }}>
       <Menu.Trigger asChild>
@@ -46,14 +52,16 @@ export default function NavbarMenu({ profile }: { profile: ProfileProps }) {
             <Menu.Item value="" my={4}>
               <HStack gap={5}>
                 <Avatar.Root colorPalette="black" size="xl" variant="solid">
-                  <Avatar.Fallback name={profile.name} />
+                  <Avatar.Fallback
+                    name={`${credentials?.firstName} ${credentials?.lastName}`}
+                  />
                 </Avatar.Root>
 
                 <Stack>
                   <Text fontWeight="bold" fontSize={18}>
-                    {profile.name}
+                    {`${credentials?.firstName} ${credentials?.lastName}`}
                   </Text>
-                  <Text mt={-1}>{profile.emailAddress}</Text>
+                  <Text mt={-1}>{credentials?.emailAddress}</Text>
                 </Stack>
               </HStack>
             </Menu.Item>
